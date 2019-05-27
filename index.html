@@ -11,19 +11,6 @@
         opacity: 1;
     }
 }
-.kulli {
-    fill: red;
-    
-}
-
-.kulli2 {
-    opacity: 0.3;
-}
-
-.perkele {
-    stroke: red;
-    transition: 300ms fill ease forwards;
-}
 
 .circle-bigrobo {
     transform-origin: center;
@@ -54,7 +41,7 @@
 .path {
   stroke-dasharray: 1000;
   stroke-dashoffset: 1000;
-  animation: dash 5s linear 1.2s forwards;
+  animation: dash 5s linear 2s forwards;
 }
 
 @keyframes fadein {
@@ -67,7 +54,7 @@
 }
 
 .bigrobo {
-    animation: fadein 0.8s ease;
+    animation: fadein 2.8s ease;
 }
 
 @keyframes shake {
@@ -97,9 +84,19 @@
   }
 }
 
-.minirobo {
+.minirobo1 {
     transition: opacity 0.82s;
-    animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+    animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) 1.2s both;
+}
+
+.minirobo2 {
+    transition: opacity 0.82s;
+    animation: shake 0.82s cubic-bezier(.16,.07,.19,.87) 1.2s both;
+}
+
+.minirobo3 {
+    transition: opacity 0.82s;
+    animation: shake 0.82s cubic-bezier(.26,.07,.39,.97) 1.2s both;
 }
 
 </style>
@@ -122,19 +119,19 @@
                 <path d="M211.269231,163.3 L211.269231,168.15" id="Line-2" stroke="#000000" stroke-width="8" stroke-linecap="round" fill-rule="nonzero" transform="translate(211.000000, 166.000000) scale(-1, 1) translate(-211.000000, -166.000000) "></path>
                 <path d="M182.269231,218 L211,217.5" id="Line" stroke="#000000" stroke-width="8" stroke-linecap="round" fill-rule="nonzero"></path>
             </g>
-            <g class="minirobo" id="Group" fill-rule="nonzero" stroke-width="8">
+            <g class="minirobo1" id="Group" fill-rule="nonzero" stroke-width="8">
                 <rect transform="translate(69.000000, 206.000000)" id="Rectangle" stroke="#FFFFFF" fill="#FFFFFF" x="0" y="0" width="44" height="44" rx="8"></rect>
                 <path transform="translate(69.000000, 206.000000)" d="M4,36.5 L33,36.5" id="Line" stroke="#000000" stroke-linecap="round"></path>
                 <path transform="translate(69.000000, 206.000000)" d="M4.26923077,17.3 L4.26923077,22.15" id="Line-2" stroke="#000000" stroke-linecap="round"></path>
                 <path transform="translate(69.000000, 206.000000)" d="M33.2692308,17.3 L33.2692308,22.15" id="Line-2" stroke="#000000" stroke-linecap="round" transform="translate(33.000000, 20.000000) scale(-1, 1) translate(-33.000000, -20.000000) "></path>
             </g>
-            <g class="minirobo" id="Group" fill-rule="nonzero" stroke-width="8">
+            <g class="minirobo2" id="Group" fill-rule="nonzero" stroke-width="8">
                 <rect transform="translate(229.000000, 279.000000)" id="Rectangle" stroke="#FFFFFF" fill="#FFFFFF" x="0" y="0" width="44" height="44" rx="8"></rect>
                 <path transform="translate(229.000000, 279.000000)" d="M7,31.5 L36,31.5" id="Line" stroke="#000000" stroke-linecap="round"></path>
                 <path transform="translate(229.000000, 279.000000)" d="M7.26923077,12.3 L7.26923077,18" id="Line-2" stroke="#000000" stroke-linecap="round"></path>
                 <path transform="translate(229.000000, 279.000000)" d="M36.2692308,12.3 L36.2692308,18" id="Line-2" stroke="#000000" stroke-linecap="round" transform="translate(36.000000, 15.000000) scale(-1, 1) translate(-36.000000, -15.000000) "></path>
             </g>
-            <g class="minirobo" id="Group" fill-rule="nonzero" stroke-width="8">
+            <g class="minirobo3" id="Group" fill-rule="nonzero" stroke-width="8">
                 <rect transform="translate(247.000000, 68.000000)" id="Rectangle" stroke="#FFFFFF" fill="#FFFFFF" x="0" y="0" width="44" height="44" rx="8"></rect>
                 <path transform="translate(247.000000, 68.000000)" d="M9,27.5 L38,27.5" id="Line" stroke="#000000" stroke-linecap="round"></path>
                 <path transform="translate(247.000000, 68.000000)" d="M9.26923077,7.3 L9.26923077,13" id="Line-2" stroke="#000000" stroke-linecap="round"></path>
