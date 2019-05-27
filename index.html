@@ -2,6 +2,11 @@
 <html>
 <head>
 <style>
+
+body {
+    font-family: monospace;
+}
+
 @keyframes zoom {
     from {
         transform: scale(0.1);
@@ -75,7 +80,7 @@
     0% {
         opacity: 0;
     }
-    30% {
+    50% {
         opacity: 0;
     }
     100% {
@@ -84,7 +89,7 @@
 }
 
 .bigrobo {
-    animation: fadein 2.0s ease;
+    animation: fadein 2.7s ease, shake 0.6s both 3.4s;
 }
 
 @keyframes shake {
@@ -108,21 +113,29 @@
 }
 
 .minirobo1 {
-    animation: fadein 0.6s ease, shake 0.6s both 2.5s;
+    animation: fadein 1.2s ease, shake 0.6s both 2.7s;
 }
 
 .minirobo2 {
-    animation: fadein 0.8s ease, shake 0.6s both 2.7s;
+    animation: fadein 1.6s ease, shake 0.6s both 2.9s;
 }
 
 .minirobo3 {
-    animation: fadein 1.0s ease, shake 0.6s both 2.9s;
+    animation: fadein 2.0s ease, shake 0.6s both 3.1s;
+}
+
+.flexbox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
 }
 
 </style>
 
 </head>
 <body>
+    <div class="flexbox">
     <svg width="378px" height="373px" viewBox="0 0 378 373" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
         <title>Pabot</title>
         <g id="pabot" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -159,5 +172,7 @@
             </g>
         </g>
     </svg>
+    <h1>Pabot</h1>
+    </div>
 </body>
 </html>
