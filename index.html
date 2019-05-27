@@ -12,24 +12,38 @@
     }
 }
 
+@keyframes zoomLong {
+    0% {
+        transform: scale(0.0);
+    }
+    30% {
+        transform: scale(0.0);
+    }
+    100% {
+        transform: scale(1.0);
+        opacity: 1;
+    }
+}
+
+
 .circle-bigrobo {
     transform-origin: center;
-    animation: zoom 0.7s ease;
+    animation: zoomLong 2.0s ease;
 }
 
 .circle-toprobo {
     transform-origin: center;
-    animation: zoom 0.7s ease 0.3s;
+    animation: zoomLong 0.6s ease;
 }
 
 .circle-bottomrobo {
     transform-origin: center;
-    animation: zoom 0.7s ease 0.2s;
+    animation: zoomLong 0.8s ease;
 }
 
 .circle-leftrobo {
     transform-origin: center;
-    animation: zoom 0.7s ease 0.4s;
+    animation: zoomLong 1.0s ease;
 }
 
 @keyframes dash {
@@ -38,30 +52,42 @@
   }
 }
 
-.path {
+.path1 {
   stroke-dasharray: 1000;
   stroke-dashoffset: 1000;
-  animation: dash 5s linear 2s forwards;
+  animation: dash 5s linear 2.3s forwards;
 }
 
+.path2 {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: dash 5s linear 2.7s forwards;
+}
+
+.path3 {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: dash 5s linear 2.5s forwards;
+}
+
+
 @keyframes fadein {
-    from {
+    0% {
         opacity: 0;
     }
-    to {
+    30% {
+        opacity: 0;
+    }
+    100% {
         opacity: 1;
     }
 }
 
 .bigrobo {
-    animation: fadein 2.8s ease;
+    animation: fadein 2.0s ease;
 }
 
 @keyframes shake {
-
-  0% {
-    opacity: 0;
-  }
 
   10%, 90% {
     transform: translate3d(-1px, 0, 0);
@@ -79,24 +105,18 @@
     transform: translate3d(4px, 0, 0);
   }
 
-  100% {
-    opacity: 1;
-  }
 }
 
 .minirobo1 {
-    transition: opacity 0.82s;
-    animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) 1.2s both;
+    animation: fadein 0.6s ease, shake 0.6s both 2.5s;
 }
 
 .minirobo2 {
-    transition: opacity 0.82s;
-    animation: shake 0.82s cubic-bezier(.16,.07,.19,.87) 1.2s both;
+    animation: fadein 0.8s ease, shake 0.6s both 2.7s;
 }
 
 .minirobo3 {
-    transition: opacity 0.82s;
-    animation: shake 0.82s cubic-bezier(.26,.07,.39,.97) 1.2s both;
+    animation: fadein 1.0s ease, shake 0.6s both 2.9s;
 }
 
 </style>
@@ -110,9 +130,9 @@
             <circle class="circle-bottomrobo" id="Oval" fill="#000000" fill-rule="nonzero" cx="251.5" cy="301.5" r="62.5"></circle>
             <circle class="circle-leftrobo" id="Oval" fill="#000000" fill-rule="nonzero" cx="92.5" cy="228.5" r="62.5"></circle>
             <circle class="circle-bigrobo" id="Oval" fill="#000000" fill-rule="nonzero" cx="189.5" cy="187.5" r="91.5"></circle>
-            <path class="path" d="M149,218 L110,233" id="Line-3" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" fill-rule="nonzero"></path>
-            <path class="path" d="M220.5,158.5 L255,108" id="Line-4" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" fill-rule="nonzero"></path>
-            <path class="path" d="M215,223 L243,279" id="Line-5" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" fill-rule="nonzero"></path>
+            <path class="path1" d="M149,218 L110,233" id="Line-3" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" fill-rule="nonzero"></path>
+            <path class="path2" d="M220.5,158.5 L255,108" id="Line-4" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" fill-rule="nonzero"></path>
+            <path class="path3" d="M215,223 L243,279" id="Line-5" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" fill-rule="nonzero"></path>
             <g class="bigrobo" id="Group" fill="#FFFFFF" fill-rule="nonzero" stroke="#FFFFFF" stroke-width="8">
                 <rect id="Rectangle" x="0" y="0" width="80" height="80" rx="8" transform="translate(149.000000, 148.000000)"></rect>
                 <path d="M182.269231,163.3 L182.269231,168.15" id="Line-2" stroke="#000000" stroke-width="8" stroke-linecap="round" fill-rule="nonzero"></path>
