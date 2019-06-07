@@ -148,10 +148,34 @@ body {
 }
 
 .content {
-    margin-top: 1rem;
+    margin: 1rem;
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
     text-align: center;
+}
+
+.code {
+    margin: 1rem;
+    display: flex;
+    border: 2px solid black;
+    border-radius: 6px;
+    align-items: center;
+    justify-content: center;
+    background-color: #f0f0f0;
+}
+
+.codetitle {
+    background-color: black;
+    color: white;
+    font-weight: bold;
+    padding: .5rem;
+}
+
+.codecontent {
+    text-align: center;
+    padding: .5rem;
 }
 
 </style>
@@ -201,8 +225,12 @@ body {
     </div>
     </div>
     <div class="content">
-            <p>A parallel executor for Robot Framework tests.
+            <p>A parallel executor for <a href="https://robotframework.org">Robot Framework</a> tests.
             Split one execution into multiple and save test execution time.</p>
+            <div class="code">
+            <div class="codetitle">Install</div>
+            <div class="codecontent">pip install -U robotframework-pabot</div>
+            </div>
     </div>
 </body>
 </html>
