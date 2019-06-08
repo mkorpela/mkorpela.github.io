@@ -176,8 +176,13 @@ body {
 }
 
 .codecontent {
-    text-align: center;
+    text-align: left;
     padding: 8px;
+    min-width: 160px;
+}
+
+pre {
+    text-align: left;
 }
 
 </style>
@@ -233,33 +238,155 @@ body {
             <div class="codetitle" onclick="installClick()"><div>Install</div></div>
             <div class="codecontent" id="installContent">pip install -U robotframework-pabot</div>
             </div>
+            
+<pre>
+.
+o-- suites
+    |
+    o-- __init__.robot
+    |   |
+    |   o-- Suite Setup
+    |   |
+    |   o-- Suite Teardown
+    |
+    o-- suite1.robot
+    |   |
+    |   o-- Test 1
+    |   |
+    |   o-- Test 2
+    |
+    o-- suite2.robot
+        |
+        o-- Test 3
+        |
+        o-- Test 4
+</pre>
+
+            <div class="code">
+            <div class="codetitle" onclick="robotClick()"><div>robot</div></div>
+            <div class="codecontent" id="robotContent">> robot suites</div>
+        </div>
+            <div class="code">
+            <div class="codetitle" onclick="pabotClick()"><div>pabot</div></div>
+            <div class="codecontent" id="pabotContent">> pabot suites</div>
+            </div>
+
+<pre id="consoleOutput">
+</pre>
+        </div>
     </div>
 </body>
 <script>
-    function installClick() {
+
+const robotOutput = `
+====================================
+Suites                              
+====================================
+Suites.Suite1                       
+====================================
+Test 1                      | PASS |
+------------------------------------
+Test 2                      | PASS |
+------------------------------------
+Suites.Suite1               | PASS |
+2 critical tests, 2 passed, 0 failed
+2 tests total, 2 passed, 0 failed
+====================================
+Suites.Suite2                       
+====================================
+Test 3                      | PASS |
+------------------------------------
+Test 4                      | PASS |
+------------------------------------
+Suites.Suite2               | PASS |
+2 critical tests, 2 passed, 0 failed
+2 tests total, 2 passed, 0 failed
+====================================
+Suites                      | PASS |
+4 critical tests, 4 passed, 0 failed
+4 tests total, 4 passed, 0 failed
+====================================
+Output:  /output.xml
+Log:     /log.html
+Report:  /report.html
+`
+
+const pabotOutput = `
+[PID:6] [0] EXECUTING Suites.Suite1
+[PID:7] [1] EXECUTING Suites.Suite2
+[PID:7] [1] PASSED Suites.Suite2
+[PID:6] [0] PASSED Suites.Suite1
+Output:  /output.xml
+Log:     /log.html
+Report:  /report.html
+Total testing: 1.20 seconds
+Elapsed time:  0.80 seconds
+`
+    function clickAnimate(label, id, fullText) {
         gtag('event', 'Click', {
         'event_category': 'Button',
-        'event_label': 'Install'
+        'event_label': label
         });
-        const elem = document.getElementById("installContent");
+        const elem = document.getElementById(id);
         const width = elem.offsetWidth;
         const height = elem.offsetHeight;
         elem.textContent = "_";
         elem.style.width = (width - 16) + "px";
         elem.style.height = (height - 16) + "px";
-        const fullText =  "pip install -U robotframework-pabot";
         let index = 0;
-        const intervalId = setInterval(() => {
-            if (index === fullText.length) {
-                elem.textContent = fullText;
-                elem.style.width = null;
-                elem.style.height = null;
-                clearInterval(intervalId);
-                return;
+        return new Promise((resolve, reject) => {
+            const intervalId = setInterval(() => {
+                index++;
+                if (index === fullText.length) {
+                    elem.textContent = fullText;
+                    elem.style.width = null;
+                    elem.style.height = null;
+                    clearInterval(intervalId);
+                    resolve();
+                    return;
+                }
+                elem.textContent = fullText.slice(0, index) + (index % 2 ? "_" : "");
+            }, 70);
+        })
+    }
+
+    function installClick() {
+        clickAnimate("Install", "installContent", "pip install -U robotframework-pabot");
+    }
+
+    function robotClick() {
+        document.getElementById("consoleOutput").textContent = "";
+        clickAnimate("Robot", "robotContent", "> robot suites").then(
+            () => {
+                let i = 0;
+                const lines = robotOutput.split("\n");
+                const intervalId = setInterval(() => {
+                    i++;
+                    document.getElementById("consoleOutput").textContent = lines.slice(0, i).join("\n");
+                    if (i === lines.length) {
+                        clearInterval(intervalId);
+                    }
+                }, 100);
             }
-            elem.textContent = fullText.slice(0, index) + (index % 2 ? "_" : "");
-            index++;
-        }, 70);
+        );
+    }
+
+    function pabotClick() {
+        document.getElementById("consoleOutput").textContent = "";
+        clickAnimate("Robot", "pabotContent", "> pabot suites").then(
+            () => {
+                let i = 0;
+                const lines = pabotOutput.split("\n");
+                console.log(lines);
+                const intervalId = setInterval(() => {
+                    i++;
+                    document.getElementById("consoleOutput").textContent = lines.slice(0, i).join("\n");
+                    if (i === lines.length) {
+                        clearInterval(intervalId);
+                    }
+                }, 100);
+            }
+        );
     }
 </script>
 </html>
