@@ -172,12 +172,12 @@ body {
     background-color: black;
     color: white;
     font-weight: bold;
-    padding: .5rem;
+    padding: 8px;
 }
 
 .codecontent {
     text-align: center;
-    padding: .5rem;
+    padding: 8px;
 }
 
 </style>
@@ -230,9 +230,36 @@ body {
             <p>A parallel executor for <a href="https://robotframework.org">Robot Framework</a> tests.
             Split one execution into multiple and save test execution time.</p>
             <div class="code">
-            <div class="codetitle"><div>Install</div></div>
-            <div class="codecontent">pip install -U robotframework-pabot</div>
+            <div class="codetitle" onclick="installClick()"><div>Install</div></div>
+            <div class="codecontent" id="installContent">pip install -U robotframework-pabot</div>
             </div>
     </div>
 </body>
+<script>
+    function installClick() {
+        gtag('event', 'Click', {
+        'event_category': 'Button',
+        'event_label': 'Install'
+        });
+        const elem = document.getElementById("installContent");
+        const width = elem.offsetWidth;
+        const height = elem.offsetHeight;
+        elem.textContent = "_";
+        elem.style.width = (width - 16) + "px";
+        elem.style.height = (height - 16) + "px";
+        const fullText =  "pip install -U robotframework-pabot";
+        let index = 0;
+        const intervalId = setInterval(() => {
+            if (index === fullText.length) {
+                elem.textContent = fullText;
+                elem.style.width = null;
+                elem.style.height = null;
+                clearInterval(intervalId);
+                return;
+            }
+            elem.textContent = fullText.slice(0, index) + (index % 2 ? "_" : "");
+            index++;
+        }, 70);
+    }
+</script>
 </html>
