@@ -166,11 +166,8 @@ body {
     background-color: #f0f0f0;
 }
 
-@keyframes blinker {
-  50% {
-    opacity: 0.7;
-    background-color: red;
-  }
+.code:hover {
+    opacity: 0.8;
 }
 
 .codetitle {
@@ -180,25 +177,22 @@ body {
     color: white;
     font-weight: bold;
     padding: 8px;
-    animation: blinker 1s linear 10s 2;
-}
-
-.codetitle:hover {
-    opacity: 0.7;
 }
 
 .codecontent {
     text-align: left;
+    color: black;
     padding: 8px;
     flex-basis: 100%;
 }
 
 .example {
-    border: 2px solid black;
     border-radius: 6px;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+    background-color: black;
+    color: white;
 }
 
 pre {
@@ -256,8 +250,8 @@ pre {
     <div class="content">
             <p>A parallel executor for <a href="https://robotframework.org">Robot Framework</a> tests.
             Split one execution into multiple and save test execution time.</p>
-            <div class="code">
-            <div class="codetitle" onclick="installClick()"><div>Install</div></div>
+            <div class="code" onclick="installClick()">
+            <div class="codetitle"><div>Install</div></div>
             <div class="codecontent" id="installContent">pip install -U robotframework-pabot</div>
             </div>
             
@@ -265,18 +259,15 @@ pre {
             <div class="example">
 
 <div class="controls">
-    <div class="code">
-        <div class="codetitle" onclick="pabotClick()"><div>pabot</div></div>
+    <div class="code" onclick="pabotClick()">
         <div class="codecontent" id="pabotContent">> pabot suites</div>
     </div>
         <p>VS.</p>
-    <div class="code">
-                <div class="codetitle" onclick="pabot2Click()"><div>pabot</div></div>
-                <div class="codecontent" id="pabot2Content">> pabot --testlevelsplit suites</div>
+    <div class="code" onclick="pabot2Click()">
+        <div class="codecontent" id="pabot2Content">> pabot --testlevelsplit suites</div>
     </div>
         <p>VS.</p>
-    <div class="code">
-        <div class="codetitle" onclick="robotClick()"><div>robot</div></div>
+    <div class="code" onclick="robotClick()">
         <div class="codecontent" id="robotContent">> robot suites</div>
     </div>
 </div>
