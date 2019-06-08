@@ -263,24 +263,28 @@ pre {
             
             <h2>Example</h2>
             <div class="example">
-                <div class="controls">
-                    <div class="code">
-                        <div class="codetitle" onclick="pabotClick()"><div>pabot</div></div>
-                        <div class="codecontent" id="pabotContent">> pabot suites</div>
-                    </div>
-                        <p>VS.</p>
-                    <div class="code">
-                                <div class="codetitle" onclick="pabot2Click()"><div>pabot</div></div>
-                                <div class="codecontent" id="pabot2Content">> pabot --testlevelsplit suites</div>
-                    </div>
-                        <p>VS.</p>
-                    <div class="code">
-                        <div class="codetitle" onclick="robotClick()"><div>robot</div></div>
-                        <div class="codecontent" id="robotContent">> robot suites</div>
-                    </div>
-                </div>
-            
-            <pre>
+
+<div class="controls">
+    <div class="code">
+        <div class="codetitle" onclick="pabotClick()"><div>pabot</div></div>
+        <div class="codecontent" id="pabotContent">> pabot suites</div>
+    </div>
+        <p>VS.</p>
+    <div class="code">
+                <div class="codetitle" onclick="pabot2Click()"><div>pabot</div></div>
+                <div class="codecontent" id="pabot2Content">> pabot --testlevelsplit suites</div>
+    </div>
+        <p>VS.</p>
+    <div class="code">
+        <div class="codetitle" onclick="robotClick()"><div>robot</div></div>
+        <div class="codecontent" id="robotContent">> robot suites</div>
+    </div>
+</div>
+
+<pre id="consoleOutput">
+</pre>
+
+<pre>
 .
 o-- suites
     |
@@ -295,9 +299,6 @@ o-- suites
         o-- Test 3
         |
         o-- Test 4
-</pre>
-
-<pre id="consoleOutput">
 </pre>
 
 </div>
