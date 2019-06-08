@@ -390,33 +390,38 @@ Elapsed time:  1.27 seconds
         clickAnimate("Install", "installContent", "pip install -U robotframework-pabot");
     }
 
-    function animateOutput(output) {
+    function animateOutput(output, instructions) {
         return () => {
-        let i = 0;
+        let i = 1;
         const lines = output.split("\n");
+        const helps = instructions || [];
         const intervalId = setInterval(() => {
-            i++;
+            if (helps.length > 0) {
+                i += helps.shift();
+            } else {
+                i++;
+            }
             document.getElementById("consoleOutput").textContent = lines.slice(0, i).join("\n");
-            if (i === lines.length) {
+            if (i >= lines.length) {
                 clearInterval(intervalId);
             }
-        }, 100);
+        }, 600);
         }
     }
 
     function robotClick() {
         document.getElementById("consoleOutput").textContent = "";
-        clickAnimate("Robot", "robotContent", "> robot suites").then(animateOutput(robotOutput));
+        clickAnimate("Robot", "robotContent", "> robot suites").then(animateOutput(robotOutput, [5, 2, 2, 3, 5, 2, 2, 4, 5, 5]));
     }
 
     function pabotClick() {
         document.getElementById("consoleOutput").textContent = "";
-        clickAnimate("Pabot", "pabotContent", "> pabot suites").then(animateOutput(pabotOutput));
+        clickAnimate("Pabot", "pabotContent", "> pabot suites").then(animateOutput(pabotOutput, [2, 2, 5]));
     }
 
     function pabot2Click() {
         document.getElementById("consoleOutput").textContent = "";
-        clickAnimate("PabotTestLevel", "pabot2Content", "> pabot --testlevelsplit suites").then(animateOutput(pabot2Output));
+        clickAnimate("PabotTestLevel", "pabot2Content", "> pabot --testlevelsplit suites").then(animateOutput(pabot2Output, [4, 4, 5]));
     }
 </script>
 </html>
