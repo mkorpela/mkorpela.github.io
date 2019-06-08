@@ -178,11 +178,21 @@ body {
 .codecontent {
     text-align: left;
     padding: 8px;
-    min-width: 160px;
+    flex-basis: 100%;
+}
+
+.example {
+    border: 2px solid black;
+    border-radius: 6px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
 pre {
     text-align: left;
+    margin: 0.5rem;
+    min-width: 240px;
 }
 
 </style>
@@ -239,7 +249,26 @@ pre {
             <div class="codecontent" id="installContent">pip install -U robotframework-pabot</div>
             </div>
             
-<pre>
+            <h2>Example</h2>
+            <div class="example">
+                <div class="controls">
+                    <div class="code">
+                        <div class="codetitle" onclick="pabotClick()"><div>pabot</div></div>
+                        <div class="codecontent" id="pabotContent">> pabot suites</div>
+                    </div>
+                        <p>VS.</p>
+                    <div class="code">
+                                <div class="codetitle" onclick="pabot2Click()"><div>pabot</div></div>
+                                <div class="codecontent" id="pabot2Content">> pabot --testlevelsplit suites</div>
+                    </div>
+                        <p>VS.</p>
+                    <div class="code">
+                        <div class="codetitle" onclick="robotClick()"><div>robot</div></div>
+                        <div class="codecontent" id="robotContent">> robot suites</div>
+                    </div>
+                </div>
+            
+            <pre>
 .
 o-- suites
     |
@@ -262,17 +291,10 @@ o-- suites
         o-- Test 4
 </pre>
 
-            <div class="code">
-            <div class="codetitle" onclick="robotClick()"><div>robot</div></div>
-            <div class="codecontent" id="robotContent">> robot suites</div>
-        </div>
-            <div class="code">
-            <div class="codetitle" onclick="pabotClick()"><div>pabot</div></div>
-            <div class="codecontent" id="pabotContent">> pabot suites</div>
-            </div>
-
 <pre id="consoleOutput">
 </pre>
+
+</div>
         </div>
     </div>
 </body>
@@ -309,7 +331,7 @@ Suites                      | PASS |
 Output:  /output.xml
 Log:     /log.html
 Report:  /report.html
-`
+`;
 
 const pabotOutput = `
 [PID:6] [0] EXECUTING Suites.Suite1
@@ -319,9 +341,25 @@ const pabotOutput = `
 Output:  /output.xml
 Log:     /log.html
 Report:  /report.html
-Total testing: 1.20 seconds
-Elapsed time:  0.80 seconds
-`
+Total testing: 3.20 seconds
+Elapsed time:  1.80 seconds
+`;
+
+const pabot2Output = `
+[PID:9] [0] EXECUTING Suites.Suite2.Test 4
+[PID:7] [1] EXECUTING Suites.Suite2.Test 3
+[PID:8] [2] EXECUTING Suites.Suite1.Test 1
+[PID:2] [3] EXECUTING Suites.Suite1.Test 2
+[PID:9] [0] PASSED Suites.Suite2.Test 4
+[PID:2] [3] PASSED Suites.Suite1.Test 2
+[PID:7] [1] PASSED Suites.Suite2.Test 3
+[PID:8] [2] PASSED Suites.Suite1.Test 1
+Output:  /output.xml
+Log:     /log.html
+Report:  /report.html
+Total testing: 3.80 seconds
+Elapsed time:  1.27 seconds
+`;
     function clickAnimate(label, id, fullText) {
         gtag('event', 'Click', {
         'event_category': 'Button',
@@ -354,39 +392,33 @@ Elapsed time:  0.80 seconds
         clickAnimate("Install", "installContent", "pip install -U robotframework-pabot");
     }
 
+    function animateOutput(output) {
+        return () => {
+        let i = 0;
+        const lines = output.split("\n");
+        const intervalId = setInterval(() => {
+            i++;
+            document.getElementById("consoleOutput").textContent = lines.slice(0, i).join("\n");
+            if (i === lines.length) {
+                clearInterval(intervalId);
+            }
+        }, 100);
+        }
+    }
+
     function robotClick() {
         document.getElementById("consoleOutput").textContent = "";
-        clickAnimate("Robot", "robotContent", "> robot suites").then(
-            () => {
-                let i = 0;
-                const lines = robotOutput.split("\n");
-                const intervalId = setInterval(() => {
-                    i++;
-                    document.getElementById("consoleOutput").textContent = lines.slice(0, i).join("\n");
-                    if (i === lines.length) {
-                        clearInterval(intervalId);
-                    }
-                }, 100);
-            }
-        );
+        clickAnimate("Robot", "robotContent", "> robot suites").then(animateOutput(robotOutput));
     }
 
     function pabotClick() {
         document.getElementById("consoleOutput").textContent = "";
-        clickAnimate("Robot", "pabotContent", "> pabot suites").then(
-            () => {
-                let i = 0;
-                const lines = pabotOutput.split("\n");
-                console.log(lines);
-                const intervalId = setInterval(() => {
-                    i++;
-                    document.getElementById("consoleOutput").textContent = lines.slice(0, i).join("\n");
-                    if (i === lines.length) {
-                        clearInterval(intervalId);
-                    }
-                }, 100);
-            }
-        );
+        clickAnimate("Robot", "pabotContent", "> pabot suites").then(animateOutput(pabotOutput));
+    }
+
+    function pabot2Click() {
+        document.getElementById("consoleOutput").textContent = "";
+        clickAnimate("Robot", "pabot2Content", "> pabot --testlevelsplit suites").then(animateOutput(pabot2Output));
     }
 </script>
 </html>
