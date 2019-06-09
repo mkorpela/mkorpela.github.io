@@ -209,8 +209,23 @@ body {
     margin: 0.5rem;
 }
 
-#newConsoleOutput {
+#newConsoleOutput1 {
     color: yellow;
+    transition: 100ms opacity linear;
+}
+
+#newConsoleOutput2 {
+    color: greenyellow;
+    transition: 100ms opacity linear;
+}
+
+#newConsoleOutput3 {
+    color: cyan;
+    transition: 100ms opacity linear;
+}
+
+#newConsoleOutput4 {
+    color: violet;
     transition: 100ms opacity linear;
 }
 
@@ -305,7 +320,13 @@ pre {
 <div class="consoleOutput">
 <pre id="oldConsoleOutput">
 </pre>
-<pre id="newConsoleOutput">
+<pre id="newConsoleOutput1">
+</pre>
+<pre id="newConsoleOutput2">
+</pre>
+<pre id="newConsoleOutput3">
+</pre>
+<pre id="newConsoleOutput4">
 </pre>
 </div>
 
@@ -425,7 +446,7 @@ Elapsed time:  1.27 seconds
     }
 
     const oldConsole = document.getElementById("oldConsoleOutput");
-    const newConsole = document.getElementById("newConsoleOutput");
+    const newConsole = document.getElementById("newConsoleOutput1");
 
     function animateOutput(output, instructions) {
         return () => {
