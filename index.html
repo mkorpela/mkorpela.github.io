@@ -209,23 +209,11 @@ body {
     margin: 0.5rem;
 }
 
-#newConsoleOutput1 {
-    color: yellow;
-    transition: 100ms opacity linear;
+#oldConsoleOutput {
+    margin: 0;
 }
 
-#newConsoleOutput2 {
-    color: greenyellow;
-    transition: 100ms opacity linear;
-}
-
-#newConsoleOutput3 {
-    color: cyan;
-    transition: 100ms opacity linear;
-}
-
-#newConsoleOutput4 {
-    color: violet;
+#newConsoleOutput {
     transition: 100ms opacity linear;
 }
 
@@ -321,14 +309,8 @@ pre {
 <div class="consoleOutput">
 <pre id="oldConsoleOutput">
 </pre>
-<pre id="newConsoleOutput1">
-</pre>
-<pre id="newConsoleOutput2">
-</pre>
-<pre id="newConsoleOutput3">
-</pre>
-<pre id="newConsoleOutput4">
-</pre>
+<div id="newConsoleOutput">
+</div>
 </div>
 
 <div class="consoleOutput">
@@ -381,66 +363,60 @@ o-- suites
 </body>
 <script>
 
-const robotOutput = `
-====================================
-Suites                              
-====================================
-Suites.Suite1                       
-====================================
-Test 1                      | PASS |
-------------------------------------
-Test 2                      | PASS |
-------------------------------------
-Suites.Suite1               | PASS |
-2 critical tests, 2 passed, 0 failed
-2 tests total, 2 passed, 0 failed
-====================================
-Suites.Suite2                       
-====================================
-Test 3                      | PASS |
-------------------------------------
-Test 4                      | PASS |
-------------------------------------
-Suites.Suite2               | PASS |
-2 critical tests, 2 passed, 0 failed
-2 tests total, 2 passed, 0 failed
-====================================
-Suites                      | PASS |
-4 critical tests, 4 passed, 0 failed
-4 tests total, 4 passed, 0 failed
-====================================
-Output:  /output.xml
-Log:     /log.html
-Report:  /report.html
-`;
+const robotOutput = `====================================##
+Suites                              #Suites#yellow
+====================================##
+Suites.Suite1                       #Suites.Suite1#yellow
+====================================##
+Test 1                      | PASS |#Suites.Suite1.Test1#yellow
+------------------------------------##
+Test 2                      | PASS |#Suites.Suite1.Test2#yellow
+------------------------------------##
+Suites.Suite1               | PASS |#Suites.Suite1#yellow
+2 critical tests, 2 passed, 0 failed##
+2 tests total, 2 passed, 0 failed##
+====================================##
+Suites.Suite2                       #Suites.Suite2#yellow
+====================================##
+Test 3                      | PASS |#Suites.Suite2.Test3#yellow
+------------------------------------##
+Test 4                      | PASS |#Suites.Suite2.Test4#yellow
+------------------------------------##
+Suites.Suite2               | PASS |#Suites.Suite2#yellow
+2 critical tests, 2 passed, 0 failed##
+2 tests total, 2 passed, 0 failed##
+====================================##
+Suites                      | PASS |#Suites#yellow
+4 critical tests, 4 passed, 0 failed##
+4 tests total, 4 passed, 0 failed##
+====================================##
+Output:  /output.xml##
+Log:     /log.html##
+Report:  /report.html##`;
 
-const pabotOutput = `
-[PID:6] [0] EXECUTING Suites.Suite1
-[PID:7] [1] EXECUTING Suites.Suite2
-[PID:7] [1] PASSED Suites.Suite2
-[PID:6] [0] PASSED Suites.Suite1
-Output:  /output.xml
-Log:     /log.html
-Report:  /report.html
-Total testing: 3.20 seconds
-Elapsed time:  1.80 seconds
-`;
+const pabotOutput = `[PID:6] [0] EXECUTING Suites.Suite1#Suites&Suites.Suite1&Suites.Suite1.Test1&Suites.Suite1.Test2#yellow
+[PID:7] [1] EXECUTING Suites.Suite2#Suites.Suite2&Suites.Suite2.Test3&Suites.Suite2.Test4#cyan
+[PID:7] [1] PASSED Suites.Suite2#Suites&Suites.Suite2&Suites.Suite2.Test3&Suites.Suite2.Test4#cyan
+[PID:6] [0] PASSED Suites.Suite1#Suites.Suite1&Suites.Suite1.Test1&Suites.Suite1.Test2#yellow
+Output:  /output.xml##
+Log:     /log.html##
+Report:  /report.html##
+Total testing: 3.20 seconds##
+Elapsed time:  1.80 seconds##`;
 
-const pabot2Output = `
-[PID:9] [0] EXECUTING Suites.Suite2.Test 4
-[PID:7] [1] EXECUTING Suites.Suite2.Test 3
-[PID:8] [2] EXECUTING Suites.Suite1.Test 1
-[PID:2] [3] EXECUTING Suites.Suite1.Test 2
-[PID:9] [0] PASSED Suites.Suite2.Test 4
-[PID:2] [3] PASSED Suites.Suite1.Test 2
-[PID:7] [1] PASSED Suites.Suite2.Test 3
-[PID:8] [2] PASSED Suites.Suite1.Test 1
-Output:  /output.xml
-Log:     /log.html
-Report:  /report.html
-Total testing: 3.80 seconds
-Elapsed time:  1.27 seconds
-`;
+const pabot2Output = `[PID:9] [0] EXECUTING Suites.Suite2.Test 4#Suites&Suites.Suite2&Suites.Suite2.Test4#violet
+[PID:7] [1] EXECUTING Suites.Suite2.Test 3#Suites.Suite2.Test3#greenyellow
+[PID:8] [2] EXECUTING Suites.Suite1.Test 1#Suites.Suite1&Suites.Suite1.Test1#yellow
+[PID:2] [3] EXECUTING Suites.Suite1.Test 2#Suites.Suite1.Test2#cyan
+[PID:9] [0] PASSED Suites.Suite2.Test 4#Suites.Suite2.Test4#violet
+[PID:2] [3] PASSED Suites.Suite1.Test 2#Suites.Suite1.Test2#cyan
+[PID:7] [1] PASSED Suites.Suite2.Test 3#Suites.Suite2&Suites.Suite2.Test3#greenyellow
+[PID:8] [2] PASSED Suites.Suite1.Test 1#Suites&Suites.Suite1&Suites.Suite1.Test1#yellow
+Output:  /output.xml##
+Log:     /log.html##
+Report:  /report.html##
+Total testing: 3.80 seconds##
+Elapsed time:  1.27 seconds##`;
     function clickAnimate(label, id, fullText) {
         gtag('event', 'Click', {
         'event_category': 'Button',
@@ -474,51 +450,72 @@ Elapsed time:  1.27 seconds
     }
 
     const oldConsole = document.getElementById("oldConsoleOutput");
-    const newConsole = document.getElementById("newConsoleOutput1");
+    const newConsole = document.getElementById("newConsoleOutput");
 
     const treeSuites = document.getElementById("Suites");
 
-    function animateOutput(output, instructions) {
+    function animateOutput(output, instructions, delay) {
         return () => {
         let i = 1;
         let j = 0;
         let treeids = [];
-        const lines = output.split("\n");
+        const lines = output.split("\n").map(line => line.split("#"));
         const helps = instructions || [];
-        return new Promise((resolve, reject) => {
-            const intervalId = setInterval(() => {
+        const drawCycle = () => {
+            while (newConsole.firstChild) {
+                    newConsole.removeChild(newConsole.firstChild);
+                }
                 treeids.forEach((id) => {document.getElementById(id).style.color = null;});
                 if (helps.length > 0) {
-                    const item = helps.shift();
-                    i += item[0];
-                    treeids = item.slice(1);
+                    i += helps.shift();
                 } else {
                     i++;
-                    treeid = null;
                 }
-                let oldOutput = lines.slice(0, j).join("\n");
-                let newOutput = lines.slice(j, i).join("\n");
-                j = i;
+                let oldOutput = lines.slice(0, j).map(l => l[0]).join("\n");
+                let newOutput = lines.slice(j, i).map(l => {
+                    let elem = document.createElement("pre");
+                    elem.textContent = l[0];
+                    elem.style.color = l[2];
+                    return elem;
+                    }
+                    );
                 oldConsole.textContent = oldOutput;
-                newConsole.textContent = newOutput;
+                newOutput.forEach(elem => {
+                    newConsole.appendChild(elem);
+                });
                 if (newOutput.length > 0) {
                     newConsole.className = "invisible";
                     setTimeout(() => {
                         newConsole.className = "";
-                        treeids.forEach((id) => {document.getElementById(id).style.color = "yellow";});
+                        treeids = [];
+                        lines.slice(j, i).forEach(item => {
+                            if (item && item.length === 3 && item[1].length > 0) {
+                                item[1].split("&").forEach(subitem => {
+                                    document.getElementById(subitem).style.color = item[2];
+                                    treeids.push(subitem);
+                                })
+                            }
+                        });
+                        j = i;
                     }, 200);
                 }
+        };
+
+        return new Promise((resolve, reject) => {
+            drawCycle();
+            const intervalId = setInterval(() => {
+                drawCycle();
                 if (i >= lines.length) {
                     clearInterval(intervalId);
                     resolve();
-                }
-            }, 2000);
+                };
+            }, delay);
         })};
     }
 
     let executing = false;
 
-    function demoClick(other1, other2, label, id, fullText, output, instructions) {
+    function demoClick(other1, other2, label, id, fullText, output, instructions, delay) {
         if (executing) { return; }
         executing = true;
         other1_origClass = other1.className;
@@ -528,7 +525,7 @@ Elapsed time:  1.27 seconds
         oldConsole.textContent = "";
         newConsole.textContent = "";
         clickAnimate(label, id, fullText).
-        then(animateOutput(output, instructions)).
+        then(animateOutput(output, instructions, delay)).
         then(() => {
             other1.className = other1_origClass;
             other2.className = other2_origClass;
@@ -546,33 +543,19 @@ Elapsed time:  1.27 seconds
     function robotClick() {
         demoClick(pc, p2c,
         "Robot", "robotContent", "> robot suites",
-        robotOutput, [
-        [3, "Suites"],
-        [2, "Suites.Suite1"], 
-        [2, "Suites.Suite1.Test1"], 
-        [2, "Suites.Suite1.Test2"], 
-        [4, "Suites.Suite1"], 
-        [2, "Suites.Suite2"], 
-        [2, "Suites.Suite2.Test3"], 
-        [2, "Suites.Suite2.Test4"], 
-        [4, "Suites.Suite2"], 
-        [4, "Suites"],
-        [3]]);
+        robotOutput, [2, 2, 2, 2, 4, 2, 2, 2, 4, 4,3], 1000);
     }
 
     function pabotClick() {
         demoClick(rc, p2c,
         "Pabot", "pabotContent", "> pabot suites",
-        pabotOutput, [
-            [2, "Suites.Suite1", "Suites.Suite2"], 
-            [2, "Suites.Suite1", "Suites.Suite2"], 
-            [5]]);
+        pabotOutput, [1, 2, 5], 5000);
     }
 
     function pabot2Click() {
         demoClick(rc, pc, 
         "PabotTestLevel", "pabot2Content", "> pabot --testlevelsplit suites", 
-        pabot2Output, [[4, "Suites"], [4, "Suites"], [5]]);
+        pabot2Output, [3, 4, 5], 5000);
     }
 </script>
 </html>
