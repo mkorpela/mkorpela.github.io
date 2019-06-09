@@ -190,6 +190,7 @@ body {
     color: black;
     padding: 8px;
     flex-basis: 100%;
+    transition: 150ms filter linear;
 }
 
 .example {
@@ -205,6 +206,10 @@ pre {
     text-align: left;
     margin: 0.5rem;
     min-width: 240px;
+}
+
+#consoleOutput {
+    min-width: 340px;
 }
 
 </style>
@@ -265,15 +270,15 @@ pre {
             <div class="example">
 
 <div class="controls">
-    <div class="code" onclick="pabotClick()" id="pabotCode">
+    <div class="code" onclick="pabotClick()">
         <div class="codecontent" id="pabotContent">> pabot suites</div>
     </div>
         <p>VS.</p>
-    <div class="code" onclick="pabot2Click()" id="pabot2Code">
+    <div class="code" onclick="pabot2Click()">
         <div class="codecontent" id="pabot2Content">> pabot --testlevelsplit suites</div>
     </div>
         <p>VS.</p>
-    <div class="code" onclick="robotClick()" id="robotCode">
+    <div class="code" onclick="robotClick()">
         <div class="codecontent" id="robotContent">> robot suites</div>
     </div>
 </div>
@@ -417,14 +422,17 @@ Elapsed time:  1.27 seconds
         })};
     }
 
-    const pc = document.getElementById("pabotCode");
+    const pc = document.getElementById("pabotContent");
     const pcOrigClass = pc.className;
-    const p2c = document.getElementById("pabot2Code");
+    const p2c = document.getElementById("pabot2Content");
     const p2cOrigClass = p2c.className;
-    const rc = document.getElementById("robotCode");
+    const rc = document.getElementById("robotContent");
     const rcOrigClass = rc.className;
+    let executing = false;
 
     function robotClick() {
+        if (executing) { return; }
+        executing = true;
         pc.className += " disabled";
         p2c.className += " disabled";
         document.getElementById("consoleOutput").textContent = "";
@@ -433,10 +441,13 @@ Elapsed time:  1.27 seconds
         then(() => {
             pc.className = pcOrigClass;
             p2c.className = p2cOrigClass;
+            executing = false;
         });
     }
 
     function pabotClick() {
+        if (executing) { return; }
+        executing = true;
         rc.className += " disabled";
         p2c.className += " disabled";
         document.getElementById("consoleOutput").textContent = "";
@@ -445,10 +456,13 @@ Elapsed time:  1.27 seconds
         then(() => {
             rc.className = rcOrigClass;
             p2c.className = p2cOrigClass;
+            executing = false;
         });
     }
 
     function pabot2Click() {
+        if (executing) { return; }
+        executing = true;
         rc.className += " disabled";
         pc.className += " disabled";
         document.getElementById("consoleOutput").textContent = "";
@@ -457,6 +471,7 @@ Elapsed time:  1.27 seconds
         then(() => {
             rc.className = rcOrigClass;
             pc.className = pcOrigClass;
+            executing = false;
         });
     }
 </script>
