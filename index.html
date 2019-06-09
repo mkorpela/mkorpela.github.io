@@ -202,10 +202,27 @@ body {
     color: white;
 }
 
+.consoleOutput {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 0.5rem;
+}
+
+#newConsoleOutput {
+    color: yellow;
+    transition: 100ms opacity linear;
+}
+
+.invisible {
+    opacity: 0;
+    visibility: hidden;
+}
+
 pre {
     text-align: left;
-    margin: 0.5rem;
     min-width: 240px;
+    margin: 0;
 }
 
 @media (max-width: 320px) {
@@ -285,10 +302,14 @@ pre {
     </div>
 </div>
 
-<pre id="consoleOutput">
+<div class="consoleOutput">
+<pre id="oldConsoleOutput">
 </pre>
+<pre id="newConsoleOutput">
+</pre>
+</div>
 
-<pre>
+<pre class="consoleOutput">
 .
 o-- suites
     |
@@ -403,9 +424,13 @@ Elapsed time:  1.27 seconds
         clickAnimate("Install", "installContent", "pip install -U robotframework-pabot");
     }
 
+    const oldConsole = document.getElementById("oldConsoleOutput");
+    const newConsole = document.getElementById("newConsoleOutput");
+
     function animateOutput(output, instructions) {
         return () => {
         let i = 1;
+        let j = 0;
         const lines = output.split("\n");
         const helps = instructions || [];
         return new Promise((resolve, reject) => {
@@ -415,7 +440,15 @@ Elapsed time:  1.27 seconds
                 } else {
                     i++;
                 }
-                document.getElementById("consoleOutput").textContent = lines.slice(0, i).join("\n");
+                let oldOutput = lines.slice(0, j).join("\n");
+                let newOutput = lines.slice(j, i).join("\n");
+                j = i;
+                oldConsole.textContent = oldOutput;
+                newConsole.textContent = newOutput;
+                newConsole.className = "invisible";
+                setTimeout(() => {
+                    newConsole.className = "";
+                }, 200);
                 if (i >= lines.length) {
                     clearInterval(intervalId);
                     resolve();
@@ -424,57 +457,49 @@ Elapsed time:  1.27 seconds
         })};
     }
 
+    let executing = false;
+
+    function demoClick(other1, other2, label, id, fullText, output, instructions) {
+        if (executing) { return; }
+        executing = true;
+        other1_origClass = other1.className;
+        other2_origClass = other2.className;
+        other1.className += " disabled";
+        other2.className += " disabled";
+        oldConsole.textContent = "";
+        newConsole.textContent = "";
+        clickAnimate(label, id, fullText).
+        then(animateOutput(output, instructions)).
+        then(() => {
+            other1.className = other1_origClass;
+            other2.className = other2_origClass;
+            executing = false;
+        });
+    }
+
     const pc = document.getElementById("pabotContent");
     const pcOrigClass = pc.className;
     const p2c = document.getElementById("pabot2Content");
     const p2cOrigClass = p2c.className;
     const rc = document.getElementById("robotContent");
     const rcOrigClass = rc.className;
-    let executing = false;
 
     function robotClick() {
-        if (executing) { return; }
-        executing = true;
-        pc.className += " disabled";
-        p2c.className += " disabled";
-        document.getElementById("consoleOutput").textContent = "";
-        clickAnimate("Robot", "robotContent", "> robot suites").
-        then(animateOutput(robotOutput, [5, 2, 2, 3, 5, 2, 2, 4, 5, 5])).
-        then(() => {
-            pc.className = pcOrigClass;
-            p2c.className = p2cOrigClass;
-            executing = false;
-        });
+        demoClick(pc, p2c,
+        "Robot", "robotContent", "> robot suites",
+        robotOutput, [5, 2, 2, 3, 5, 2, 2, 4, 5, 5]);
     }
 
     function pabotClick() {
-        if (executing) { return; }
-        executing = true;
-        rc.className += " disabled";
-        p2c.className += " disabled";
-        document.getElementById("consoleOutput").textContent = "";
-        clickAnimate("Pabot", "pabotContent", "> pabot suites").
-        then(animateOutput(pabotOutput, [2, 2, 5])).
-        then(() => {
-            rc.className = rcOrigClass;
-            p2c.className = p2cOrigClass;
-            executing = false;
-        });
+        demoClick(rc, p2c,
+        "Pabot", "pabotContent", "> pabot suites",
+        pabotOutput, [2, 2, 5]);
     }
 
     function pabot2Click() {
-        if (executing) { return; }
-        executing = true;
-        rc.className += " disabled";
-        pc.className += " disabled";
-        document.getElementById("consoleOutput").textContent = "";
-        clickAnimate("PabotTestLevel", "pabot2Content", "> pabot --testlevelsplit suites").
-        then(animateOutput(pabot2Output, [4, 4, 5])).
-        then(() => {
-            rc.className = rcOrigClass;
-            pc.className = pcOrigClass;
-            executing = false;
-        });
+        demoClick(rc, pc, 
+        "PabotTestLevel", "pabot2Content", "> pabot --testlevelsplit suites", 
+        pabot2Output, [4, 4, 5]);
     }
 </script>
 </html>
