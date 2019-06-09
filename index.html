@@ -395,9 +395,9 @@ Log:     /log.html##
 Report:  /report.html##`;
 
 const pabotOutput = `[PID:6] [0] EXECUTING Suites.Suite1#Suites&Suites.Suite1&Suites.Suite1.Test1&Suites.Suite1.Test2#yellow
-[PID:7] [1] EXECUTING Suites.Suite2#Suites.Suite2&Suites.Suite2.Test3&Suites.Suite2.Test4#cyan
-[PID:7] [1] PASSED Suites.Suite2#Suites&Suites.Suite2&Suites.Suite2.Test3&Suites.Suite2.Test4#cyan
-[PID:6] [0] PASSED Suites.Suite1#Suites.Suite1&Suites.Suite1.Test1&Suites.Suite1.Test2#yellow
+[PID:7] [1] EXECUTING Suites.Suite2#Suites&Suites.Suite2&Suites.Suite2.Test3&Suites.Suite2.Test4#cyan
+[PID:7] [1] PASSED Suites.Suite2#Suites.Suite2&Suites#cyan
+[PID:6] [0] PASSED Suites.Suite1#Suites.Suite1&Suites#yellow
 Output:  /output.xml##
 Log:     /log.html##
 Report:  /report.html##
@@ -405,13 +405,13 @@ Total testing: 3.20 seconds##
 Elapsed time:  1.80 seconds##`;
 
 const pabot2Output = `[PID:9] [0] EXECUTING Suites.Suite2.Test 4#Suites&Suites.Suite2&Suites.Suite2.Test4#violet
-[PID:7] [1] EXECUTING Suites.Suite2.Test 3#Suites.Suite2.Test3#greenyellow
-[PID:8] [2] EXECUTING Suites.Suite1.Test 1#Suites.Suite1&Suites.Suite1.Test1#yellow
-[PID:2] [3] EXECUTING Suites.Suite1.Test 2#Suites.Suite1.Test2#cyan
-[PID:9] [0] PASSED Suites.Suite2.Test 4#Suites.Suite2.Test4#violet
-[PID:2] [3] PASSED Suites.Suite1.Test 2#Suites.Suite1.Test2#cyan
-[PID:7] [1] PASSED Suites.Suite2.Test 3#Suites.Suite2&Suites.Suite2.Test3#greenyellow
-[PID:8] [2] PASSED Suites.Suite1.Test 1#Suites&Suites.Suite1&Suites.Suite1.Test1#yellow
+[PID:7] [1] EXECUTING Suites.Suite2.Test 3#Suites&Suites.Suite2&Suites.Suite2.Test3#greenyellow
+[PID:8] [2] EXECUTING Suites.Suite1.Test 1#Suites&Suites.Suite1&Suites.Suite1.Test1#yellow
+[PID:2] [3] EXECUTING Suites.Suite1.Test 2#Suites&Suites.Suite1&Suites.Suite1.Test2#cyan
+[PID:9] [0] PASSED Suites.Suite2.Test 4#Suites.Suite2.Test4&Suites.Suite2&Suites#violet
+[PID:2] [3] PASSED Suites.Suite1.Test 2#Suites.Suite1.Test2&Suites.Suite1&Suites#cyan
+[PID:7] [1] PASSED Suites.Suite2.Test 3#Suites.Suite2.Test3&Suites.Suite2&Suites#greenyellow
+[PID:8] [2] PASSED Suites.Suite1.Test 1#Suites.Suite1.Test1&Suites.Suite1&Suites#yellow
 Output:  /output.xml##
 Log:     /log.html##
 Report:  /report.html##
@@ -490,9 +490,11 @@ Elapsed time:  1.27 seconds##`;
                         treeids = [];
                         lines.slice(j, i).forEach(item => {
                             if (item && item.length === 3 && item[1].length > 0) {
-                                item[1].split("&").forEach(subitem => {
-                                    document.getElementById(subitem).style.color = item[2];
-                                    treeids.push(subitem);
+                                item[1].split("&").forEach((subitem, index, arr) => {
+                                    setTimeout(() => {
+                                        document.getElementById(subitem).style.color = item[2];
+                                        treeids.push(subitem);
+                                        }, index*delay/(arr.length));
                                 })
                             }
                         });
