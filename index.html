@@ -492,6 +492,9 @@ Elapsed time:  1.27 seconds##`;
                             if (item && item.length === 3 && item[1].length > 0) {
                                 item[1].split("&").forEach((subitem, index, arr) => {
                                     setTimeout(() => {
+                                        if (index > 0) {
+                                            document.getElementById(arr[index-1]).style.color = null;
+                                        };
                                         document.getElementById(subitem).style.color = item[2];
                                         treeids.push(subitem);
                                         }, index*delay/(arr.length));
