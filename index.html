@@ -172,6 +172,10 @@ body {
     }
 }
 
+.disabled {
+    filter: blur(2px);
+}
+
 .codetitle {
     display: flex;
     align-items: center;
@@ -261,15 +265,15 @@ pre {
             <div class="example">
 
 <div class="controls">
-    <div class="code" onclick="pabotClick()">
+    <div class="code" onclick="pabotClick()" id="pabotCode">
         <div class="codecontent" id="pabotContent">> pabot suites</div>
     </div>
         <p>VS.</p>
-    <div class="code" onclick="pabot2Click()">
+    <div class="code" onclick="pabot2Click()" id="pabot2Code">
         <div class="codecontent" id="pabot2Content">> pabot --testlevelsplit suites</div>
     </div>
         <p>VS.</p>
-    <div class="code" onclick="robotClick()">
+    <div class="code" onclick="robotClick()" id="robotCode">
         <div class="codecontent" id="robotContent">> robot suites</div>
     </div>
 </div>
@@ -397,33 +401,63 @@ Elapsed time:  1.27 seconds
         let i = 1;
         const lines = output.split("\n");
         const helps = instructions || [];
-        const intervalId = setInterval(() => {
-            if (helps.length > 0) {
-                i += helps.shift();
-            } else {
-                i++;
-            }
-            document.getElementById("consoleOutput").textContent = lines.slice(0, i).join("\n");
-            if (i >= lines.length) {
-                clearInterval(intervalId);
-            }
-        }, 600);
-        }
+        return new Promise((resolve, reject) => {
+            const intervalId = setInterval(() => {
+                if (helps.length > 0) {
+                    i += helps.shift();
+                } else {
+                    i++;
+                }
+                document.getElementById("consoleOutput").textContent = lines.slice(0, i).join("\n");
+                if (i >= lines.length) {
+                    clearInterval(intervalId);
+                    resolve();
+                }
+            }, 600);
+        })};
     }
 
+    const pc = document.getElementById("pabotCode");
+    const pcOrigClass = pc.className;
+    const p2c = document.getElementById("pabot2Code");
+    const p2cOrigClass = p2c.className;
+    const rc = document.getElementById("robotCode");
+    const rcOrigClass = rc.className;
+
     function robotClick() {
+        pc.className += " disabled";
+        p2c.className += " disabled";
         document.getElementById("consoleOutput").textContent = "";
-        clickAnimate("Robot", "robotContent", "> robot suites").then(animateOutput(robotOutput, [5, 2, 2, 3, 5, 2, 2, 4, 5, 5]));
+        clickAnimate("Robot", "robotContent", "> robot suites").
+        then(animateOutput(robotOutput, [5, 2, 2, 3, 5, 2, 2, 4, 5, 5])).
+        then(() => {
+            pc.className = pcOrigClass;
+            p2c.className = p2cOrigClass;
+        });
     }
 
     function pabotClick() {
+        rc.className += " disabled";
+        p2c.className += " disabled";
         document.getElementById("consoleOutput").textContent = "";
-        clickAnimate("Pabot", "pabotContent", "> pabot suites").then(animateOutput(pabotOutput, [2, 2, 5]));
+        clickAnimate("Pabot", "pabotContent", "> pabot suites").
+        then(animateOutput(pabotOutput, [2, 2, 5])).
+        then(() => {
+            rc.className = rcOrigClass;
+            p2c.className = p2cOrigClass;
+        });
     }
 
     function pabot2Click() {
+        rc.className += " disabled";
+        pc.className += " disabled";
         document.getElementById("consoleOutput").textContent = "";
-        clickAnimate("PabotTestLevel", "pabot2Content", "> pabot --testlevelsplit suites").then(animateOutput(pabot2Output, [4, 4, 5]));
+        clickAnimate("PabotTestLevel", "pabot2Content", "> pabot --testlevelsplit suites").
+        then(animateOutput(pabot2Output, [4, 4, 5])).
+        then(() => {
+            rc.className = rcOrigClass;
+            pc.className = pcOrigClass;
+        });
     }
 </script>
 </html>
