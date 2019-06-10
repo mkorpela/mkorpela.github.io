@@ -317,43 +317,43 @@ pre {
 <pre>
 .
 </pre>
-<pre id="Suites">
+<pre id="S">
 o-- suites
 </pre>
 <pre>
     |
 </pre>
-<pre id="Suites.Suite1">
+<pre id="s1">
     o-- suite1.robot
 </pre>
 <pre>
     |   |
 </pre>
-<pre id="Suites.Suite1.Test1">
+<pre id="t1">
     |   o-- Test 1
 </pre>
 <pre>
     |   |
 </pre>
-<pre id="Suites.Suite1.Test2">
+<pre id="t2">
     |   o-- Test 2
 </pre>
 <pre>
     |
 </pre>
-<pre id="Suites.Suite2">
+<pre id="s2">
     o-- suite2.robot
 </pre>
 <pre>
         |
 </pre>
-<pre id="Suites.Suite2.Test3">
+<pre id="t3">
         o-- Test 3
 </pre>
 <pre>
         |
 </pre>
-<pre id="Suites.Suite2.Test4">
+<pre id="t4">
         o-- Test 4
 </pre>
 </div>
@@ -364,29 +364,29 @@ o-- suites
 <script>
 
 const robotOutput = `====================================##
-Suites                              #Suites#yellow
+Suites                              #S#yellow
 ====================================##
-Suites.Suite1                       #Suites.Suite1#yellow
+Suites.Suite1                       #s1#yellow
 ====================================##
-Test 1                      | PASS |#Suites.Suite1.Test1#yellow
+Test 1                      | PASS |#t1#yellow
 ------------------------------------##
-Test 2                      | PASS |#Suites.Suite1.Test2#yellow
+Test 2                      | PASS |#t2#yellow
 ------------------------------------##
-Suites.Suite1               | PASS |#Suites.Suite1#yellow
+Suites.Suite1               | PASS |#s1#yellow
 2 critical tests, 2 passed, 0 failed##
 2 tests total, 2 passed, 0 failed##
 ====================================##
-Suites.Suite2                       #Suites.Suite2#yellow
+Suites.Suite2                       #s2#yellow
 ====================================##
-Test 3                      | PASS |#Suites.Suite2.Test3#yellow
+Test 3                      | PASS |#t3#yellow
 ------------------------------------##
-Test 4                      | PASS |#Suites.Suite2.Test4#yellow
+Test 4                      | PASS |#t4#yellow
 ------------------------------------##
-Suites.Suite2               | PASS |#Suites.Suite2#yellow
+Suites.Suite2               | PASS |#s2#yellow
 2 critical tests, 2 passed, 0 failed##
 2 tests total, 2 passed, 0 failed##
 ====================================##
-Suites                      | PASS |#Suites#yellow
+Suites                      | PASS |#S#yellow
 4 critical tests, 4 passed, 0 failed##
 4 tests total, 4 passed, 0 failed##
 ====================================##
@@ -394,29 +394,29 @@ Output:  /output.xml##
 Log:     /log.html##
 Report:  /report.html##`;
 
-const pabotOutput = `[PID:6] [0] EXECUTING Suites.Suite1#Suites&Suites.Suite1&Suites.Suite1.Test1&Suites.Suite1.Test2#yellow
-[PID:7] [1] EXECUTING Suites.Suite2#Suites&Suites.Suite2&Suites.Suite2.Test3&Suites.Suite2.Test4#cyan
-[PID:7] [1] PASSED Suites.Suite2#Suites.Suite2&Suites#cyan
-[PID:6] [0] PASSED Suites.Suite1#Suites.Suite1&Suites#yellow
+const pabotOutput = `[PID:6] [0] EXECUTING Suites.Suite1#S&s1&t1&t2&s1&S#yellow
+[PID:7] [1] EXECUTING Suites.Suite2#S&s2&t3&t4&s2&S#cyan
+[PID:7] [1] PASSED Suites.Suite2##cyan
+[PID:6] [0] PASSED Suites.Suite1##yellow
 Output:  /output.xml##
 Log:     /log.html##
 Report:  /report.html##
-Total testing: 3.20 seconds##
-Elapsed time:  1.80 seconds##`;
+Total testing: 16.20 seconds##
+Elapsed time:  9.10 seconds##`;
 
-const pabot2Output = `[PID:9] [0] EXECUTING Suites.Suite2.Test 4#Suites&Suites.Suite2&Suites.Suite2.Test4#violet
-[PID:7] [1] EXECUTING Suites.Suite2.Test 3#Suites&Suites.Suite2&Suites.Suite2.Test3#greenyellow
-[PID:8] [2] EXECUTING Suites.Suite1.Test 1#Suites&Suites.Suite1&Suites.Suite1.Test1#yellow
-[PID:2] [3] EXECUTING Suites.Suite1.Test 2#Suites&Suites.Suite1&Suites.Suite1.Test2#cyan
-[PID:9] [0] PASSED Suites.Suite2.Test 4#Suites.Suite2.Test4&Suites.Suite2&Suites#violet
-[PID:2] [3] PASSED Suites.Suite1.Test 2#Suites.Suite1.Test2&Suites.Suite1&Suites#cyan
-[PID:7] [1] PASSED Suites.Suite2.Test 3#Suites.Suite2.Test3&Suites.Suite2&Suites#greenyellow
-[PID:8] [2] PASSED Suites.Suite1.Test 1#Suites.Suite1.Test1&Suites.Suite1&Suites#yellow
+const pabot2Output = `[PID:9] [0] EXECUTING Suites.Suite2.Test 4#S&s2&t4&s2&S#violet
+[PID:7] [1] EXECUTING Suites.Suite2.Test 3#S&s2&t3&s2&S#greenyellow
+[PID:8] [2] EXECUTING Suites.Suite1.Test 1#S&s1&t1&s1&S#yellow
+[PID:2] [3] EXECUTING Suites.Suite1.Test 2#S&s1&t2&s1&S#cyan
+[PID:9] [0] PASSED Suites.Suite2.Test 4##violet
+[PID:2] [3] PASSED Suites.Suite1.Test 2##cyan
+[PID:7] [1] PASSED Suites.Suite2.Test 3##greenyellow
+[PID:8] [2] PASSED Suites.Suite1.Test 1##yellow
 Output:  /output.xml##
 Log:     /log.html##
 Report:  /report.html##
-Total testing: 3.80 seconds##
-Elapsed time:  1.27 seconds##`;
+Total testing: 18.80 seconds##
+Elapsed time:  7.27 seconds##`;
     function clickAnimate(label, id, fullText) {
         gtag('event', 'Click', {
         'event_category': 'Button',
@@ -454,68 +454,62 @@ Elapsed time:  1.27 seconds##`;
 
     const treeSuites = document.getElementById("Suites");
 
-    function animateOutput(output, instructions, delay) {
+    function animateOutput(output, instructions) {
         return () => {
         let i = 1;
         let j = 0;
+        let delay = 0;
         let treeids = [];
         const lines = output.split("\n").map(line => line.split("#"));
         const helps = instructions || [];
-        const drawCycle = () => {
-            while (newConsole.firstChild) {
-                    newConsole.removeChild(newConsole.firstChild);
+        const drawCycle = (resolve) => {
+            while (newConsole.firstChild) { newConsole.removeChild(newConsole.firstChild); }
+            treeids.forEach((id) => {document.getElementById(id).style.color = null;});
+            if (helps.length > 0) {
+                let helpItem = helps.shift();
+                i += helpItem[0];
+                delay = helpItem[1]*1000;
+            } else {
+                i++;
+                delay = 0;
+            }
+            let oldOutput = lines.slice(0, j).map(l => l[0]).join("\n");
+            let newOutput = lines.slice(j, i).map(l => {
+                let elem = document.createElement("pre");
+                elem.textContent = l[0];
+                elem.style.color = l[2];
+                return elem;
                 }
-                treeids.forEach((id) => {document.getElementById(id).style.color = null;});
-                if (helps.length > 0) {
-                    i += helps.shift();
-                } else {
-                    i++;
-                }
-                let oldOutput = lines.slice(0, j).map(l => l[0]).join("\n");
-                let newOutput = lines.slice(j, i).map(l => {
-                    let elem = document.createElement("pre");
-                    elem.textContent = l[0];
-                    elem.style.color = l[2];
-                    return elem;
-                    }
-                    );
-                oldConsole.textContent = oldOutput;
-                newOutput.forEach(elem => {
-                    newConsole.appendChild(elem);
-                });
-                if (newOutput.length > 0) {
-                    newConsole.className = "invisible";
-                    setTimeout(() => {
-                        newConsole.className = "";
-                        treeids = [];
-                        lines.slice(j, i).forEach(item => {
-                            if (item && item.length === 3 && item[1].length > 0) {
-                                item[1].split("&").forEach((subitem, index, arr) => {
-                                    setTimeout(() => {
-                                        if (index > 0) {
-                                            document.getElementById(arr[index-1]).style.color = null;
-                                        };
-                                        document.getElementById(subitem).style.color = item[2];
-                                        treeids.push(subitem);
-                                        }, index*delay/(arr.length));
-                                })
-                            }
-                        });
-                        j = i;
-                    }, 200);
-                }
+            );
+            oldConsole.textContent = oldOutput;
+            newOutput.forEach(elem => { newConsole.appendChild(elem); });
+            if (newOutput.length > 0) {
+                newConsole.className = "invisible";
+                setTimeout(() => {
+                    newConsole.className = "";
+                    treeids = [];
+                    lines.slice(j, i).forEach((item, rowIndex) => {
+                        if (item && item.length === 3 && item[1].length > 0) {
+                            item[1].split("&").forEach((subitem, index, arr) => {
+                                setTimeout(() => {
+                                    if (index > 0) {
+                                        document.getElementById(arr[index-1]).style.color = null;
+                                    };
+                                    document.getElementById(subitem).style.color = item[2];
+                                    treeids.push(subitem);
+                                    }, index*delay/(arr.length)+rowIndex*200);
+                            })
+                        }
+                    });
+                    j = i;
+                    setTimeout(() => drawCycle(resolve), delay);
+                }, 200);
+            } else {
+                resolve();
+            }
         };
 
-        return new Promise((resolve, reject) => {
-            drawCycle();
-            const intervalId = setInterval(() => {
-                drawCycle();
-                if (i >= lines.length) {
-                    clearInterval(intervalId);
-                    resolve();
-                };
-            }, delay);
-        })};
+        return new Promise((resolve, reject) => { drawCycle(resolve); })};
     }
 
     let executing = false;
@@ -548,19 +542,19 @@ Elapsed time:  1.27 seconds##`;
     function robotClick() {
         demoClick(pc, p2c,
         "Robot", "robotContent", "> robot suites",
-        robotOutput, [2, 2, 2, 2, 4, 2, 2, 2, 4, 4,3], 1000);
+        robotOutput, [2, 2, 2, 2, 4, 2, 2, 2, 4, 4,3].map(i => [i, 1]));
     }
 
     function pabotClick() {
         demoClick(rc, p2c,
         "Pabot", "pabotContent", "> pabot suites",
-        pabotOutput, [1, 2, 5], 5000);
+        pabotOutput, [[1, 7], [2, 1], [5,1]]);
     }
 
     function pabot2Click() {
         demoClick(rc, pc, 
         "PabotTestLevel", "pabot2Content", "> pabot --testlevelsplit suites", 
-        pabot2Output, [3, 4, 5], 5000);
+        pabot2Output, [[3, 4], [4, 1], [5, 1]]);
     }
 </script>
 </html>
