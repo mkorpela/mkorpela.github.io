@@ -56,7 +56,7 @@ Version: 0.64
 Scope: global</pre>
 <div class="doc">
 PabotLib helps in parallel execution with <a href="https://pabot.org">pabot</a>.
-PabotLib contains 4 groups of keywords:
+PabotLib contains 4 types of keywords:
 <ul>
     <li><a href="#execution">Execution affecting keywords</a></li>
     <li><a href="#valuetransfer">Value transfer between processes</a></li>
@@ -82,8 +82,8 @@ These allow control to when and where a keyword will be executed.
 </div>
 <div class="doc">
 Runs a setup keyword with args only once at the first possible moment when
-an execution has gone throught this step. The executions after that
-will skip this step. If the firts execution fails, all others will also.
+an execution has gone through this step. The executions after that
+will skip this step. If the first execution fails, all others will also.
 </div>
         </div>
         <div class="keyword">
@@ -130,9 +130,9 @@ between all processes.
 </p>
 <p>
 This can be used for example to limit work done by all the processes.
-One process can create a new testing environment in suite setup
+One process can create a new testing environment in a <a href="https://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#suite-setup-and-teardown">suite setup</a>
 (use <a href="#run-setup-only-once">Run Setup Only Once</a> keyword to limit to only one process).
-The process can in setup publish created environment related values with
+The process can in the setup publish created environment related values with
 <a href="#set-parallel-value-for-key">Set Parallel Value For Key</a>.
 All processes can access these values with <a href="#get-parallel-value-for-key">Get Parallel Value For Key</a>.
 </p>
