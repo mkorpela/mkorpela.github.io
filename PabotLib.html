@@ -86,7 +86,7 @@ an execution has gone through this step. The executions after that
 will skip this step. If the first execution fails, all others will also.
 </div>
         </div>
-        <div class="keyword">
+        <div class="keyword" id="run-teardown-only-once">
                 <div class="keywordcall">
                         <div class="keywordname">Run Teardown Only Once</div>
 <div class="keywordargs">[keyword, *args]</div>
@@ -98,7 +98,7 @@ Note it is important to not have any conditions preventing from executing
 this step as that may prevent this keyword from working correctly.
 </div>
         </div>
-        <div class="keyword">
+        <div class="keyword" id="run-only-once">
                 <div class="keywordcall">
 <div class="keywordname">Run Only Once</div>
 <div class="keywordargs">[keyword]</div>
@@ -110,7 +110,7 @@ wait before going through this keyword before the actual
 command has been executed.
 </div>
         </div>
-        <div class="keyword">
+        <div class="keyword" id="run-on-last-process">
                 <div class="keywordcall">
 <div class="keywordname">Run On Last Process</div>
 <div class="keywordargs">[keyword]</div>
@@ -137,8 +137,8 @@ The process can in the setup publish created environment related values with
 All processes can access these values with <a href="#get-parallel-value-for-key">Get Parallel Value For Key</a>.
 </p>
 </div>
-        <div class="keyword">
-                <div class="keywordcall" id="set-parallel-value-for-key">
+        <div class="keyword" id="set-parallel-value-for-key">
+                <div class="keywordcall">
 <div class="keywordname">Set Parallel Value For Key</div>
 <div class="keywordargs">[key, value]</div></div>
 <div class="doc">
@@ -177,7 +177,7 @@ Special key "tags" can be used to limit what value sets will be acquired.
 <a href="https://github.com/mkorpela/pabot#pabotlib-example">Example use case</a>.
 </p>
         </div>
-        <div class="keyword">
+        <div class="keyword" id="acquire-value-set">
                 <div class="keywordcall">
 <div class="keywordname">Acquire Value Set</div>
 <div class="keywordargs">[*tags]</div>
@@ -190,7 +190,7 @@ other processes to access it.
 Add tags to limit the possible value sets that this returns.
 </div>
         </div>
-        <div class="keyword">
+        <div class="keyword" id="get-value-from-set">
                 <div class="keywordcall">
                 <div class="keywordname">Get Value From Set</div>
 <div class="keywordargs">[key]</div>
@@ -199,7 +199,7 @@ Add tags to limit the possible value sets that this returns.
 Get a value from previously reserved value set.
 </div>
         </div>
-        <div class="keyword">
+        <div class="keyword" id="release-value-set">
                 <div class="keywordcall">
                 <div class="keywordname">Release Value Set</div>
 <div class="keywordargs">[]</div>
@@ -215,7 +215,7 @@ Release a reserved value set so that other executions can use it also.
 A lock is a synchronization mechanism for enforcing limits on access to a resource.
 Locks allow to enforce <a href="https://en.wikipedia.org/wiki/Mutual_exclusion">a mutual exclusion concurrency control</a> policy.
         </div>
-        <div class="keyword">
+        <div class="keyword" id="acquire-lock">
                 <div class="keywordcall">
                 <div class="keywordname">Acquire Lock</div>
 <div class="keywordargs">[name]</div>
@@ -228,7 +228,7 @@ where they are acquiring the lock until the process that has it
 releases it.
 </div>
         </div>
-        <div class="keyword">
+        <div class="keyword" id="release-lock">
                 <div class="keywordcall">
                 <div class="keywordname">Release Lock</div>
 <div class="keywordargs">[name]</div>
@@ -238,7 +238,7 @@ Release a lock with name.
 This will enable other processes to acquire the lock.
 </div>
         </div>
-        <div class="keyword">
+        <div class="keyword" id="release-locks">
                 <div class="keywordcall">
                 <div class="keywordname">Release Locks</div>
 <div class="keywordargs">[]</div></div>
