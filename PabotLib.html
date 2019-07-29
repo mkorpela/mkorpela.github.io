@@ -47,7 +47,9 @@ body {
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-  gtag('config', 'UA-141142606-1', { 'anonymize_ip': true });
+  gtag('config', 'UA-141142606-1', {
+        'anonymize_ip': true,
+        'page_path': location.pathname+location.search+location.hash });
 </script>
 </head>
 <body>
