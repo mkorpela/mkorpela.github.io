@@ -51,6 +51,12 @@ body {
   gtag('config', 'UA-141142606-1', {
         'anonymize_ip': true,
         'page_path': location.pathname+location.search+location.hash });
+  window.onhashchange = function() { 
+        gtag('event', 'HashChange', {
+        'event_category': 'Subsection',
+        'event_label': window.location.hash
+        });
+   }
 </script>
 </head>
 <body>
