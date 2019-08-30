@@ -158,13 +158,22 @@ from all the pabot processes.
         </div>
         <div class="keyword" id="get-parallel-value-for-key">
                 <div class="keywordcall">
-<div class="keywordname">Get Parallel Value For Key</div>
-<div class="keywordargs">[key]</div>
-</div>
-<div class="doc">
+                        <div class="keywordname">Get Parallel Value For Key</div>
+                        <div class="keywordargs">[key]</div>
+                </div>
+                <div class="doc">
 Get the value for a key. If there is no value for the key then empty
 string is returned.
-</div>
+                </div>
+        </div>
+        <div class="keyword" id="import-shared-library">
+                <div class="keywordcall">
+                        <div class="keywordname">Import Shared Library</div>
+                        <div class="keywordargs">[library]</div>
+                </div>
+                <div class="doc">
+Import a library so that the library instance is shared between executions.
+                </div>
         </div>
     </div>
     <div class="keywordgroup" id="sharedresource">
@@ -217,6 +226,16 @@ Get a value from previously reserved value set.
 <div class="doc">
 Release a reserved value set so that other executions can use it also.
 </div>
+        </div>
+        <div class="keyword" id="disable-value-set">
+                <div class="keywordcall">
+                        <div class="keywordname">Disable Value Set</div>
+                        <div class="keywordargs">[]</div>
+                </div>
+                <div class="doc">
+Disable and release a reserved value set so that executions can not use it.
+After calling this a new value set can be aquired by calling execution.
+                </div>
         </div>
     </div>
     <div class="keywordgroup" id="locks">
