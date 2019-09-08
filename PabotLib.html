@@ -33,6 +33,14 @@ body {
     justify-content: space-between;
 }
 
+.librarysetting {
+    font-weight: bold;
+}
+
+.libraryname {
+    font-weight: bold;
+}
+
 .keywordname {
     font-weight: bold;
 }
@@ -136,7 +144,7 @@ This keyword will wait until all other processes have stopped executing.
 <div class="doc">
 <p>
 Pabot processes do not share variables by default. These keywords allow sharing of a value
-between all processes. 
+between all processes.
 </p>
 <p>
 This can be used for example to limit work done by all the processes.
@@ -145,6 +153,10 @@ One process can create a new testing environment in a <a href="https://robotfram
 The process can in the setup publish created environment related values with
 <a href="#set-parallel-value-for-key">Set Parallel Value For Key</a>.
 All processes can access these values with <a href="#get-parallel-value-for-key">Get Parallel Value For Key</a>.
+</p>
+<p>
+Also a custom wrapper library <a href="#shared-library">pabot.SharedLibrary</a> is provided to allow adding new shared functionalities
+as a remote library.
 </p>
 </div>
         <div class="keyword" id="set-parallel-value-for-key">
@@ -157,14 +169,27 @@ from all the pabot processes.
 </div>
         </div>
         <div class="keyword" id="get-parallel-value-for-key">
-                <div class="keywordcall">
-                        <div class="keywordname">Get Parallel Value For Key</div>
-                        <div class="keywordargs">[key]</div>
-                </div>
-                <div class="doc">
-Get the value for a key. If there is no value for the key then empty
-string is returned.
-                </div>
+                        <div class="keywordcall">
+                                        <div class="keywordname">Get Parallel Value For Key</div>
+                                        <div class="keywordargs">[key]</div>
+                                </div>
+                                <div class="doc">
+                Get the value for a key. If there is no value for the key then empty
+                string is returned.
+                                </div>
+        </div>
+        <div class="keyword" id="shared-library">
+                        
+                                <div class="keywordcall">
+                                        <div class="librarysetting">Library</div>
+                                        <div class="libraryname">pabot.SharedLibrary</div>
+                                        <div class="keywordargs">[library]</div>
+                                </div>
+                                <div class="doc">
+                Wrap a library import with pabot.SharedLibrary to automatically make it a remote library when running with pabot.
+                When running with robot, this will produce a normal library.
+                Library instance will be shared with all executions. Scope of the library is global from pabot execution start to the end.
+                                </div>
         </div>
     </div>
     <div class="keywordgroup" id="sharedresource">
